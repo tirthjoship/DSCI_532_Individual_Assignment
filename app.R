@@ -28,7 +28,7 @@ ui <- page_fillable(
   layout_sidebar(
     sidebar = sidebar(
       title = "Filters",
-      tags$em("Narrow down the view by region, purchase behaviour, and churn risk."),
+      tags$em("Focus the dashboard by region, purchase category, and churn risk."),
       selectInput(
         inputId  = "region",
         label    = "Region",
@@ -43,36 +43,40 @@ ui <- page_fillable(
       ),
       sliderInput(
         inputId = "churn_range",
-        label   = "Churn probability range",
+        label   = "Churn Probability Range",
         min     = 0,
         max     = 1,
         value   = c(0, 1),
         step    = 0.01
       ),
-      actionButton("reset", "Reset filters"),
+      actionButton("reset", "Reset Filters"),
       open = "desktop"
     ),
     layout_columns(
-      card(
-        h2("Salescope — customer retention overview"),
-        p(tags$em("See which customer segments are most valuable and most at risk, so you know where to focus outreach."))
+      tags$div(
+        style = "margin: 0; padding: 0.25rem 0 0.5rem 0;",
+        tags$h3(style = "margin: 0;", "Salescope — Customer Retention Overview"),
+        tags$p(
+          style = "margin: 0.1rem 0 0 0;",
+          tags$small(tags$em("Review customer value and churn risk for the selected filters."))
+        )
       )
     ),
     layout_columns(
       value_box(
-        title = "Avg Lifetime Value",
+        title = "Average Lifetime Value",
         value = textOutput("kpi_ltv"),
         theme = "success",
         p(tags$em("Average expected revenue from customers in the current view."))
       ),
       value_box(
-        title = "Avg Churn Probability",
+        title = "Average Churn Probability",
         value = textOutput("kpi_churn"),
         theme = "danger",
         p(tags$em("Average likelihood that these customers will stop buying."))
       ),
       value_box(
-        title = "Customers in view",
+        title = "Customers in View",
         value = textOutput("kpi_count"),
         theme = "info",
         p(tags$em("Number of customers matching the filters."))
@@ -86,7 +90,7 @@ ui <- page_fillable(
         full_screen = TRUE
       ),
       card(
-        card_header("Filtered customer data"),
+        card_header("Filtered Customer Data"),
         DT::DTOutput("table_preview"),
         full_screen = TRUE
       ),
