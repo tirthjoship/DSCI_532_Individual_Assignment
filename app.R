@@ -62,19 +62,19 @@ ui <- page_fillable(
       value_box(
         title = "Avg Lifetime Value",
         value = textOutput("kpi_ltv"),
-        theme_color = "success",
+        theme = "success",
         p(tags$em("Average expected revenue from customers in the current view."))
       ),
       value_box(
         title = "Avg Churn Probability",
         value = textOutput("kpi_churn"),
-        theme_color = "danger",
+        theme = "danger",
         p(tags$em("Average likelihood that these customers will stop buying."))
       ),
       value_box(
         title = "Customers in view",
         value = textOutput("kpi_count"),
-        theme_color = "info",
+        theme = "info",
         p(tags$em("Number of customers matching the filters."))
       ),
       fill = FALSE
