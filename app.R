@@ -7,6 +7,7 @@ library(bslib)
 library(dplyr)
 library(plotly)
 library(readr)
+library(DT)
 
 # Load data
 sales_df <- read_csv("data/raw/sales_and_customer_insights.csv", show_col_types = FALSE)
