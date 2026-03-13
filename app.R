@@ -1,3 +1,7 @@
+if (dir.exists(".Rlib")) {
+  .libPaths(c(".Rlib", .libPaths()))
+}
+
 library(shiny)
 library(bslib)
 library(dplyr)
@@ -13,10 +17,17 @@ categories <- sort(unique(sales_df$Most_Frequent_Category))
 # UI
 ui <- page_fillable(
   title = "Salescope — Customer Retention & Churn Insights (R)",
-  theme = bs_theme(bootswatch = "lumen"),
+  theme = bs_theme(
+    bootswatch = "lumen",
+    primary = "#0d6efd",
+    success = "#198754",
+    danger = "#dc3545",
+    info = "#0dcaf0"
+  ),
   layout_sidebar(
     sidebar = sidebar(
       title = "Filters",
+      tags$em("Narrow down the view by region, purchase behaviour, and churn risk."),
       selectInput(
         inputId  = "region",
         label    = "Region",
@@ -41,17 +52,29 @@ ui <- page_fillable(
       open = "desktop"
     ),
     layout_columns(
+      card(
+        h2("Salescope — customer retention overview"),
+        p(tags$em("See which customer segments are most valuable and most at risk, so you know where to focus outreach."))
+      )
+    ),
+    layout_columns(
       value_box(
         title = "Avg Lifetime Value",
-        value = textOutput("kpi_ltv")
+        value = textOutput("kpi_ltv"),
+        theme_color = "success",
+        p(tags$em("Average expected revenue from customers in the current view."))
       ),
       value_box(
         title = "Avg Churn Probability",
-        value = textOutput("kpi_churn")
+        value = textOutput("kpi_churn"),
+        theme_color = "danger",
+        p(tags$em("Average likelihood that these customers will stop buying."))
       ),
       value_box(
         title = "Customers in view",
-        value = textOutput("kpi_count")
+        value = textOutput("kpi_count"),
+        theme_color = "info",
+        p(tags$em("Number of customers matching the filters."))
       ),
       fill = FALSE
     ),
@@ -63,7 +86,7 @@ ui <- page_fillable(
       ),
       card(
         card_header("Filtered customer data"),
-        dataTableOutput("table_preview"),
+        DT::DTOutput("table_preview"),
         full_screen = TRUE
       ),
       col_widths = c(6, 6)
@@ -147,7 +170,7 @@ server <- function(input, output, session) {
       )
   })
 
-  output$table_preview <- renderDataTable(
+  output$table_preview <- DT::renderDT(
     {
       filtered_df() %>%
         select(
@@ -156,7 +179,8 @@ server <- function(input, output, session) {
         ) %>%
         head(100)
     },
-    options = list(pageLength = 10)
+    options = list(pageLength = 10),
+    rownames = FALSE
   )
 }
 

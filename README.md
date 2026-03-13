@@ -4,7 +4,7 @@ Re-implementation of our group project [Salescope](https://github.com/UBC-MDS/DS
 
 The app lets you filter customers by region, purchase category, and churn probability range. Three value boxes update to show the average lifetime value, average churn rate, and number of customers matching your filters. Below that there's a scatter plot of lifetime value vs. days between purchases (coloured by retention strategy) and a scrollable table of the filtered rows.
 
-**Deployed app:** https://019cd653-e8a3-560d-97eb-75821de1ea7c.share.connect.posit.cloud/
+**Deployed app:** [Posit Connect Cloud app](https://019cd653-e8a3-560d-97eb-75821de1ea7c.share.connect.posit.cloud/)
 
 ---
 
@@ -19,7 +19,7 @@ Rscript install.R
 Or just run this directly from the R console:
 
 ```r
-install.packages(c("shiny", "bslib", "dplyr", "plotly", "readr"))
+install.packages(c("shiny", "bslib", "dplyr", "plotly", "readr", "DT"))
 ```
 
 The data file (`data/raw/sales_and_customer_insights.csv`) is already in the repo. To start the app:
