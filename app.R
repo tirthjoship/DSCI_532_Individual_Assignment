@@ -17,7 +17,7 @@ categories <- sort(unique(sales_df$Most_Frequent_Category))
 
 # UI
 ui <- page_fillable(
-  title = "Salescope — Customer Retention & Churn Insights (R)",
+  title = "Customer Retention Overview Dashboard | Salescope",
   theme = bs_theme(
     bootswatch = "lumen",
     primary = "#0d6efd",
@@ -55,10 +55,10 @@ ui <- page_fillable(
     layout_columns(
       tags$div(
         style = "margin: 0; padding: 0.25rem 0 0.5rem 0;",
-        tags$h3(style = "margin: 0;", "Salescope — Customer Retention Overview"),
+        tags$h3(style = "margin: 0;", "Customer Retention Overview Dashboard"),
         tags$p(
           style = "margin: 0.1rem 0 0 0;",
-          tags$small(tags$em("Review customer value and churn risk for the selected filters."))
+          tags$small(tags$em("Powered by Salescope to help sales teams focus on the right customers."))
         )
       )
     ),
